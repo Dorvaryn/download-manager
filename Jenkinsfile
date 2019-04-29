@@ -3,7 +3,12 @@ pipeline {
     stages {
         stage('build') {
             steps {
-                sh './gradlew --version'
+                sh './gradlew clean assemble'
+            }
+        }
+        stage('test') {
+            steps {
+                sh './gradlew build'
             }
         }
     }

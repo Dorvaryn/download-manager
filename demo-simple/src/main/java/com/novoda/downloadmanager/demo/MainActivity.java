@@ -59,6 +59,8 @@ public class MainActivity extends AppCompatActivity {
         downloadBatchStatusViewOne = findViewById(R.id.batch_1);
         downloadBatchStatusViewTwo = findViewById(R.id.batch_2);
 
+        //Comment added for PR testing
+
         downloadBatchStatusViewOne.setListener(new DownloadBatchStatusView.DownloadBatchStatusListener() {
             @Override
             public void onBatchPaused() {
