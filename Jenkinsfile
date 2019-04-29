@@ -12,4 +12,10 @@ pipeline {
             }
         }
     }
+    post {
+        always {
+            archiveArtifacts artifacts: 'library/build/outputs/aar/*.aar', fingerprint: true
+            junit 'library/build/reports/**/*.xml'
+        }
+    }
 }
