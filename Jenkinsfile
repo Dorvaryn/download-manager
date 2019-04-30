@@ -14,16 +14,24 @@ pipeline {
         stage('Static analysis') {
             parallel {
                 stage('PMD') {
-                    sh './gradlew pmdMain'
+                    steps {
+                        sh './gradlew pmdMain'
+                    }
                 }
                 stage('Checkstyle') {
-                    sh './gradlew checkStyleMain'
+                    steps {
+                        sh './gradlew checkStyleMain'
+                    }
                 }
                 stage('Findbugs') {
-                    sh './gradlew findbugs'
+                    steps {
+                        sh './gradlew findbugs'
+                    }
                 }
                 stage('lint') {
-                    sh './gradlew lint'
+                    steps {
+                        sh './gradlew lint'
+                    }
                 }
             }
         }
