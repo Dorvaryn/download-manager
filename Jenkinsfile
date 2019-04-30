@@ -8,7 +8,23 @@ pipeline {
         }
         stage('test') {
             steps {
-                sh './gradlew build'
+                sh './gradlew test'
+            }
+        }
+        stage('Static analysis') {
+            parallel {
+                stage('PMD') {
+                    sh './gradlew pmdMain'
+                }
+                stage('Checkstyle') {
+                    sh './gradlew checkStyleMain'
+                }
+                stage('Findbugs') {
+                    sh './gradlew findbugs'
+                }
+                stage('lint') {
+                    sh './gradlew lint'
+                }
             }
         }
     }
