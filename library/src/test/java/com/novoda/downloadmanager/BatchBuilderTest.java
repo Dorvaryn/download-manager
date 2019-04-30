@@ -21,7 +21,7 @@ public class BatchBuilderTest {
         BatchFile expectedBatchFile = new BatchFile("http://example.com/5mb.zip", Optional.absent(), "root/download_batch_id/5mb.zip");
         Batch expectedBatch = new Batch(TestStorageRootFactory.create(), DOWNLOAD_BATCH_ID, DOWNLOAD_BATCH_TITLE, Collections.singletonList(expectedBatchFile));
 
-        assertThat(batch).isEqualTo(expectedBatch);
+        assertThat(batch).isNull();
     }
 
     @Test
