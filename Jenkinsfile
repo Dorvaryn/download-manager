@@ -1,5 +1,5 @@
 pipeline {
-    agent { docker { image 'runmymind/docker-android-sdk' } }
+    agent { node { label 'mobile' } }
     stages {
         stage('build') {
             steps {
@@ -8,7 +8,31 @@ pipeline {
         }
         stage('test') {
             steps {
-                sh './gradlew build'
+                sh './gradlew test'
+            }
+        }
+        stage('Static analysis') {
+            parallel {
+                stage('PMD') {
+                    steps {
+                        sh './gradlew pmdMain'
+                    }
+                }
+                stage('Checkstyle') {
+                    steps {
+                        sh './gradlew checkStyleMain'
+                    }
+                }
+                stage('Findbugs') {
+                    steps {
+                        sh './gradlew findbugs'
+                    }
+                }
+                stage('lint') {
+                    steps {
+                        sh './gradlew lint'
+                    }
+                }
             }
         }
     }
